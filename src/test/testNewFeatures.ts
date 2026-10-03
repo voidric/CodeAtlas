@@ -5,7 +5,7 @@ import { MacroClusterEngine } from '../graph/macroCluster';
 import { SymbolNode, ClassNode, FunctionNode, RelationEdge } from '../types';
 
 console.log('================================================================');
-console.log('🌟 Testing FunctionGraph New Features: TS Parser, Tree & Macro');
+console.log('🌟 Testing CodeAtlas Architecture New Features: TS Parser, Tree & Macro');
 console.log('================================================================');
 
 // 1. 测试 TsLanguageParser

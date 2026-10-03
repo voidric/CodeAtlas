@@ -1,5 +1,5 @@
 /**
- * FunctionGraph 标准 MCP (Model Context Protocol) Stdio 独立运行入口
+ * CodeAtlas Architecture 标准 MCP (Model Context Protocol) Stdio 独立运行入口
  * 供 Antigravity / Codex / Cursor 作为本地 MCP 工具服务直接配置运行：
  *   node out/mcpEntry.js
  */

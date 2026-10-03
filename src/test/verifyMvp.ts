@@ -1,5 +1,5 @@
 /**
- * FunctionGraph 第一版 MVP 端到端自动化集成验证脚本
+ * CodeAtlas Architecture 第一版 MVP 端到端自动化集成验证脚本
  */
 import * as fs from 'fs';
 import * as path from 'path';
@@ -12,7 +12,7 @@ import { FileParseResult, SymbolNode } from '../types';
 
 async function runMvpVerification() {
   console.log('================================================================');
-  console.log('🚀 FunctionGraph v0.1.0 MVP 端到端综合业务链路验证');
+  console.log('🚀 CodeAtlas Architecture v0.1.0 MVP 端到端综合业务链路验证');
   console.log('================================================================\n');
 
   const rootDir = path.resolve(__dirname, '../../sample_project');
@@ -124,7 +124,7 @@ async function runMvpVerification() {
   }
 
   console.log('\n================================================================');
-  console.log('🎉 FunctionGraph v0.1.0 MVP 端到端全部核心链路验证 100% 通过！');
+  console.log('🎉 CodeAtlas Architecture v0.1.0 MVP 端到端全部核心链路验证 100% 通过！');
   console.log('================================================================\n');
 }
 

@@ -32,7 +32,7 @@ function test(name: string, fn: () => void) {
 }
 
 console.log('====================================================');
-console.log('FunctionGraph Python AST & Resolver Unit Tests');
+console.log('CodeAtlas Architecture Python AST & Resolver Unit Tests');
 console.log('====================================================\n');
 
 // -----------------------------------------------------------------

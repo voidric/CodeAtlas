@@ -4,7 +4,7 @@ import { OllamaClient } from '../ai/ollamaClient';
 import { AiCacheManager } from '../ai/cacheManager';
 
 console.log('================================================================');
-console.log('🌟 Testing FunctionGraph v0.3.1: Settings Modal, Micro-batch & Cache');
+console.log('🌟 Testing CodeAtlas Architecture v0.3.1: Settings Modal, Micro-batch & Cache');
 console.log('================================================================\n');
 
 // 1. 测试 Webview HTML 结构

@@ -1,5 +1,5 @@
 /**
- * FunctionGraph MCP (Model Context Protocol) 原生服务引擎 (FR-18)
+ * CodeAtlas Architecture MCP (Model Context Protocol) 原生服务引擎 (FR-18)
  * 向 Antigravity / Codex / Cursor 等 AI Agent 暴露标准工具，精准提供代码拓扑切片与上下文
  */
 

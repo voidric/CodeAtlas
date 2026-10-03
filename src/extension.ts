@@ -522,9 +522,9 @@ export function activate(context: vscode.ExtensionContext) {
         return;
       }
 
-      const fgConfig = vscode.workspace.getConfiguration('codeatlas');
-      const useCache = fgConfig.get<boolean>('enableIncrementalCache', true);
-      const microBatchSize = fgConfig.get<number>('microBatchSize', 3);
+      const config = vscode.workspace.getConfiguration('codeatlas');
+      const useCache = config.get<boolean>('enableIncrementalCache', true);
+      const microBatchSize = config.get<number>('microBatchSize', 3);
 
       isBatchAnalyzing = true;
       const total = filesToAnalyze.length;

@@ -1,6 +1,6 @@
 /**
  * 命名业务流管理器 (FR-08)
- * 读写工作区根目录下的 .vscode/function_flows.json 配置文件，方便团队 Git 共享
+ * 读写工作区根目录下的 .vscode/codeatlas_flows.json 配置文件，方便团队 Git 共享
  */
 
 import * as fs from 'fs';
@@ -22,9 +22,11 @@ export interface FlowConfigFile {
 
 export class FlowManager {
   private configPath: string;
+  private legacyConfigPath: string;
 
   constructor(workspaceRoot: string) {
-    this.configPath = path.join(workspaceRoot, '.vscode', 'function_flows.json');
+    this.configPath = path.join(workspaceRoot, '.vscode', 'codeatlas_flows.json');
+    this.legacyConfigPath = path.join(workspaceRoot, '.vscode', 'function_flows.json');
   }
 
   /**
@@ -32,10 +34,14 @@ export class FlowManager {
    */
   public loadFlows(): NamedFlow[] {
     try {
-      if (!fs.existsSync(this.configPath)) {
+      const activePath = fs.existsSync(this.configPath)
+        ? this.configPath
+        : (fs.existsSync(this.legacyConfigPath) ? this.legacyConfigPath : null);
+
+      if (!activePath) {
         return [];
       }
-      const raw = fs.readFileSync(this.configPath, 'utf-8');
+      const raw = fs.readFileSync(activePath, 'utf-8');
       const data = JSON.parse(raw) as FlowConfigFile;
       return data.flows || [];
     } catch {
@@ -86,7 +92,7 @@ export class FlowManager {
       };
       fs.writeFileSync(this.configPath, JSON.stringify(fileContent, null, 2), 'utf-8');
     } catch (err) {
-      console.warn('保存 function_flows.json 失败:', err);
+      console.warn('保存 codeatlas_flows.json 失败:', err);
     }
   }
 }

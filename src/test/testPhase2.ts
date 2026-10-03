@@ -1,5 +1,5 @@
 /**
- * FunctionGraph Phase 2 综合集成测试 (Ollama + Cache + Search + MCP)
+ * CodeAtlas Architecture Phase 2 综合集成测试 (Ollama + Cache + Search + MCP)
  */
 
 import * as fs from 'fs';
@@ -15,7 +15,7 @@ import { FileParseResult, SymbolNode } from '../types';
 
 async function runPhase2Tests() {
   console.log('================================================================');
-  console.log('🌟 FunctionGraph Phase 2 (Ollama + Cache + Search + MCP) 集成测试');
+  console.log('🌟 CodeAtlas Architecture Phase 2 (Ollama + Cache + Search + MCP) 集成测试');
   console.log('================================================================\n');
 
   const workspaceRoot = path.resolve(__dirname, '../../');
@@ -57,7 +57,7 @@ async function runPhase2Tests() {
   }
   const edges = resolveImportsAndRelations(parseResults);
   cacheManager.saveSnapshot(parseResults, workspaceRoot, edges);
-  console.log(`   ✓ 已保存快照到 .vscode/.functiongraph_cache.json`);
+  console.log(`   ✓ 已保存快照到 .vscode/.codeatlas_cache.json`);
 
   // 模拟二次冷启动读取
   const snapshot = cacheManager.loadSnapshot();
@@ -97,7 +97,7 @@ async function runPhase2Tests() {
   }
 
   // 4. 测试 MCP 原生服务协议
-  console.log('\n[Step 4] 验证 FunctionGraph MCP Server 协议调用 (Antigravity/Codex 对接)...');
+  console.log('\n[Step 4] 验证 CodeAtlas Architecture MCP Server 协议调用 (Antigravity/Codex 对接)...');
   const mcpServer = new CodeAtlasMcpServer(graphManager, searchEngine);
 
   // 4.0 测试 MCP 握手协议 (initialize, notification, ping)
@@ -168,7 +168,7 @@ async function runPhase2Tests() {
   console.log(`   ✓ MCP get_dead_code_report 检测到死代码候选: ${deadData.totalCandidates} 个`);
 
   console.log('\n================================================================');
-  console.log('🎉 FunctionGraph Phase 2 全部功能与集成测试 100% 通过！');
+  console.log('🎉 CodeAtlas Architecture Phase 2 全部功能与集成测试 100% 通过！');
   console.log('================================================================\n');
 }
 

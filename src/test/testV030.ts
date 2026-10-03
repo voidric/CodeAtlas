@@ -6,7 +6,7 @@ import { HierarchyManager } from '../graph/hierarchyManager';
 import { FileParseResult } from '../types';
 
 console.log('================================================================');
-console.log('🌟 Testing FunctionGraph v0.3.0: Macro Flow, Bare Scripts & Tree');
+console.log('🌟 Testing CodeAtlas Architecture v0.3.0: Macro Flow, Bare Scripts & Tree');
 console.log('================================================================\n');
 
 // 1. 测试无 if __name__ == '__main__': 直接运行的脚本 (Bare Execution Scripts)

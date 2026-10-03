@@ -6,7 +6,7 @@ import { DeadCodeDetector } from '../graph/deadCodeDetector';
 import { FileParseResult } from '../types';
 
 console.log('================================================================');
-console.log('🌟 Testing FunctionGraph v0.2.2: Usages, Dead Code & Contrast');
+console.log('🌟 Testing CodeAtlas Architecture v0.2.2: Usages, Dead Code & Contrast');
 console.log('================================================================\n');
 
 // 构造深层学习/常规 Python 脚本代码：包含顶层直接调用的函数与从未被调用的孤立函数

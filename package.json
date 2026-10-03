@@ -34,7 +34,7 @@
       "activitybar": [
         {
           "id": "codeatlas-container",
-          "title": "CodeAtlas",
+          "title": "CodeAtlas Architecture",
           "icon": "$(type-hierarchy)"
         }
       ]
@@ -87,7 +87,7 @@
       ]
     },
     "configuration": {
-      "title": "CodeAtlas",
+      "title": "CodeAtlas Architecture",
       "properties": {
         "codeatlas.scanOnStartup": {
           "type": "boolean",
