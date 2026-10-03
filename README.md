@@ -62,7 +62,7 @@ code --install-extension voidric.codeatlas-arch
 
 ### 方式二：从 VSIX 离线包安装
 
-1. 获取编译生成的 `codeatlas-0.1.0.vsix` 文件。
+1. 获取编译生成的 `codeatlas-arch-0.1.0.vsix` 文件。
 2. 打开 VS Code / Cursor，按 `Ctrl+Shift+P` (macOS: `Cmd+Shift+P`) 打开命令面板。
 3. 输入并选择 `Extensions: Install from VSIX...`。
 4. 选择对应的 `.vsix` 文件完成安装。
@@ -116,7 +116,7 @@ CodeAtlas 提供了完全独立的 Stdio MCP 入口脚本：`out/mcpEntry.js`。
   "mcpServers": {
     "codeatlas": {
       "command": "node",
-      "args": ["D:/CodeAtlas/out/mcpEntry.js", "D:/CodeAtlas"],
+      "args": ["D:/CodeAtlas Architecture/out/mcpEntry.js", "D:/CodeAtlas Architecture"],
       "env": {}
     }
   }

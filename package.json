@@ -6,7 +6,7 @@
   "publisher": "voidric",
   "repository": {
     "type": "git",
-    "url": "https://github.com/voidric/CodeAtlas.git"
+    "url": "https://github.com/voidric/CodeAtlas-Architecture.git"
   },
   "engines": {
     "vscode": "^1.85.0"
