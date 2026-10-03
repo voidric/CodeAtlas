@@ -16,9 +16,9 @@ dist/
 .DS_Store
 Thumbs.db
 
-# Cache & Local State
-.vscode/*cache*.json
-.vscode/.*_cache.json
+# IDE & Local Workspace configs
+.vscode/
+sample_project/
 
 # Internal specifications & design documents
 REQUIREMENTS.md
