@@ -1,10 +1,9 @@
 {
   "name": "codeatlas-architecture",
   "displayName": "CodeAtlas Architecture: Code Graph & Lens",
-  "description": "多语言代码调用图谱与依赖分析扩展 (Python / TypeScript / JS)，支持静态链路追踪、未引用代码排查与本地 MCP 服务",
-  "version": "0.1.2",
+  "description": "Interactive call graph and dependency visualization for Python, TypeScript, and JavaScript with static call tracing and unused code detection.",
+  "version": "0.1.3",
   "publisher": "voidric",
-  "icon": "media/icon.png",
   "repository": {
     "type": "git",
     "url": "https://github.com/voidric/CodeAtlas-Architecture.git"
@@ -45,24 +44,24 @@
         {
           "type": "webview",
           "id": "codeatlas.mainView",
-          "name": "架构图谱大纲"
+          "name": "Architecture Outline"
         }
       ]
     },
     "commands": [
       {
         "command": "codeatlas.refresh",
-        "title": "重新扫描工作区",
+        "title": "CodeAtlas: Rescan Workspace",
         "icon": "$(refresh)"
       },
       {
         "command": "codeatlas.showInGraph",
-        "title": "在图谱中聚焦当前实体",
+        "title": "CodeAtlas: Focus Current Symbol in Graph",
         "icon": "$(symbol-class)"
       },
       {
         "command": "codeatlas.openWebviewPanel",
-        "title": "在独立标签页打开架构图谱",
+        "title": "CodeAtlas: Open Architecture Graph in Tab",
         "icon": "$(split-horizontal)"
       }
     ],
@@ -93,12 +92,12 @@
         "codeatlas.scanOnStartup": {
           "type": "boolean",
           "default": true,
-          "description": "工作区打开时是否自动扫描代码构建图谱"
+          "description": "Automatically scan workspace and build call graph on startup"
         },
         "codeatlas.cursorDebounceMs": {
           "type": "number",
           "default": 250,
-          "description": "编辑器光标移动与图谱联动的防抖延迟（毫秒）"
+          "description": "Debounce delay (ms) for editor cursor tracking in graph"
         },
         "codeatlas.ignoreDirs": {
           "type": "array",
@@ -116,27 +115,27 @@
             "out",
             "build"
           ],
-          "description": "扫描时忽略的目录模式"
+          "description": "Directory patterns to ignore during workspace scanning"
         },
         "codeatlas.llmEndpoint": {
           "type": "string",
           "default": "http://127.0.0.1:11434/v1",
-          "description": "通用大模型 API 接口地址 Base URL (兼容 OpenAI 规范与本地服务，默认 http://127.0.0.1:11434/v1)"
+          "description": "Base URL for LLM API (OpenAI-compatible or local Ollama, default http://127.0.0.1:11434/v1)"
         },
         "codeatlas.apiKey": {
           "type": "string",
           "default": "",
-          "description": "API 密钥 (OpenAI 规范 Bearer Token，本地无鉴权服务可留空)"
+          "description": "API Key for authorization (leave empty for unauthenticated local services)"
         },
         "codeatlas.selectedModel": {
           "type": "string",
           "default": "qwen2.5-coder:7b",
-          "description": "指定分析使用的大模型名称 (如 qwen2.5-coder:7b, deepseek-chat, gpt-4o)"
+          "description": "Model identifier for architecture analysis (e.g. qwen2.5-coder:7b, deepseek-chat, gpt-4o)"
         },
         "codeatlas.enableIncrementalCache": {
           "type": "boolean",
           "default": true,
-          "description": "是否启用基于文件内容哈希 (MD5) 的增量分析缓存（未修改文件瞬间跳过）"
+          "description": "Enable MD5 content-hash incremental caching for instant startup"
         }
       }
     }
