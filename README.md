@@ -1,4 +1,4 @@
-# CodeAtlas
+# CodeAtlas Architecture
 
 面向 Python / TypeScript / JavaScript 的代码拓扑分析、架构可视化与模型上下文协议 (MCP) 扩展。
 
