@@ -1,6 +1,6 @@
 # CodeAtlas Architecture
 
-[![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/voidric.codeatlas-arch?label=Marketplace&logo=visual-studio-code)](https://marketplace.visualstudio.com/items?itemName=voidric.codeatlas-arch)
+[![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/voidric.codeatlas-architecture?label=Marketplace&logo=visual-studio-code)](https://marketplace.visualstudio.com/items?itemName=voidric.codeatlas-architecture)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue?logo=typescript)](https://www.typescriptlang.org/)
 [![Node.js](https://img.shields.io/badge/Node.js-%3E%3D18.0-green?logo=node.js)](https://nodejs.org/)
@@ -63,12 +63,12 @@
 在 VS Code 扩展商店搜索 `CodeAtlas Architecture`，或使用命令行直接安装：
 
 ```bash
-code --install-extension voidric.codeatlas-arch
+code --install-extension voidric.codeatlas-architecture
 ```
 
 ### 方式二：从 VSIX 离线包安装
 
-1. 从 [Releases](https://github.com/voidric/CodeAtlas-Architecture/releases) 下载最新的 `codeatlas-arch-x.x.x.vsix`；
+1. 从 [Releases](https://github.com/voidric/CodeAtlas-Architecture/releases) 下载最新的 `codeatlas-architecture-x.x.x.vsix`；
 2. 在 VS Code 中按 `Ctrl+Shift+P` (macOS: `Cmd+Shift+P`)；
 3. 输入并选择 `Extensions: Install from VSIX...`，选中下载的文件即可完成安装。
 
