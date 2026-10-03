@@ -1,0 +1,166 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <!-- 背景渐变 -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="50%" stop-color="#111827" />
+      <stop offset="100%" stop-color="#090d16" />
+    </linearGradient>
+
+    <!-- 边框发光渐变 -->
+    <linearGradient id="borderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.6" />
+      <stop offset="50%" stop-color="#818cf8" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#c084fc" stop-opacity="0.1" />
+    </linearGradient>
+
+    <!-- 发光滤镜 -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <filter id="coreGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="16" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <!-- 主连线渐变 -->
+    <linearGradient id="edgeCyanBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#6366f1" />
+    </linearGradient>
+
+    <linearGradient id="edgeIndigoViolet" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#818cf8" />
+      <stop offset="100%" stop-color="#c084fc" />
+    </linearGradient>
+
+    <linearGradient id="edgeCyanEmerald" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34d399" />
+      <stop offset="100%" stop-color="#38bdf8" />
+    </linearGradient>
+
+    <!-- 节点渐变 -->
+    <radialGradient id="centerNodeGrad" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#7dd3fc" />
+      <stop offset="60%" stop-color="#0284c7" />
+      <stop offset="100%" stop-color="#0369a1" />
+    </radialGradient>
+
+    <radialGradient id="nodeBlue" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#93c5fd" />
+      <stop offset="100%" stop-color="#3b82f6" />
+    </radialGradient>
+
+    <radialGradient id="nodePurple" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#c4b5fd" />
+      <stop offset="100%" stop-color="#8b5cf6" />
+    </radialGradient>
+
+    <radialGradient id="nodeEmerald" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#6ee7b7" />
+      <stop offset="100%" stop-color="#10b981" />
+    </radialGradient>
+
+    <radialGradient id="nodeAmber" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#fde68a" />
+      <stop offset="100%" stop-color="#f59e0b" />
+    </radialGradient>
+  </defs>
+
+  <!-- 1. 背景圆角矩形容器 (Squircle) -->
+  <rect x="16" y="16" width="480" height="480" rx="108" fill="url(#bgGrad)" stroke="url(#borderGrad)" stroke-width="3" />
+
+  <!-- 2. 背景微弱网格参考线 (体现架构与 Atlas 地图感) -->
+  <g opacity="0.08" stroke="#ffffff" stroke-width="1.5">
+    <circle cx="256" cy="256" r="160" fill="none" stroke-dasharray="4 6" />
+    <circle cx="256" cy="256" r="90" fill="none" />
+    <line x1="256" y1="60" x2="256" y2="452" stroke-dasharray="3 5" />
+    <line x1="60" y1="256" x2="452" y2="256" stroke-dasharray="3 5" />
+  </g>
+
+  <!-- 3. 背景核心漫反射光晕 -->
+  <circle cx="256" cy="256" r="80" fill="#38bdf8" opacity="0.12" filter="url(#coreGlow)" />
+
+  <!-- 4. 拓扑图谱连线 (有向边与调用流) -->
+  <g stroke-linecap="round">
+    <!-- 外层主框架连线 (形成一个大气的架构棱镜结构) -->
+    <line x1="256" y1="110" x2="140" y2="200" stroke="url(#edgeCyanBlue)" stroke-width="4.5" opacity="0.75" />
+    <line x1="256" y1="110" x2="372" y2="200" stroke="url(#edgeCyanBlue)" stroke-width="4.5" opacity="0.75" />
+    
+    <line x1="140" y1="200" x2="160" y2="350" stroke="url(#edgeIndigoViolet)" stroke-width="4" opacity="0.6" />
+    <line x1="372" y1="200" x2="352" y2="350" stroke="url(#edgeIndigoViolet)" stroke-width="4" opacity="0.6" />
+
+    <line x1="160" y1="350" x2="256" y2="400" stroke="url(#edgeCyanEmerald)" stroke-width="4" opacity="0.6" />
+    <line x1="352" y1="350" x2="256" y2="400" stroke="url(#edgeCyanEmerald)" stroke-width="4" opacity="0.6" />
+
+    <!-- 辐射至中心核心节点的调用边 (Ego Graph) -->
+    <line x1="256" y1="110" x2="256" y2="256" stroke="#38bdf8" stroke-width="5" filter="url(#glow)" opacity="0.9" />
+    <line x1="140" y1="200" x2="256" y2="256" stroke="#818cf8" stroke-width="4.5" opacity="0.85" />
+    <line x1="372" y1="200" x2="256" y2="256" stroke="#60a5fa" stroke-width="4.5" opacity="0.85" />
+    <line x1="160" y1="350" x2="256" y2="256" stroke="#34d399" stroke-width="4" opacity="0.8" />
+    <line x1="352" y1="350" x2="256" y2="256" stroke="#a78bfa" stroke-width="4" opacity="0.8" />
+    <line x1="256" y1="400" x2="256" y2="256" stroke="#38bdf8" stroke-width="4" opacity="0.7" />
+
+    <!-- 次级细连线 (增加工程拓扑丰富感) -->
+    <line x1="140" y1="200" x2="372" y2="200" stroke="#475569" stroke-width="2" stroke-dasharray="5 7" opacity="0.4" />
+    <line x1="160" y1="350" x2="352" y2="350" stroke="#475569" stroke-width="2" stroke-dasharray="5 7" opacity="0.4" />
+  </g>
+
+  <!-- 5. 卫星拓扑节点 -->
+  <!-- 顶部根节点 (主入口/系统层) -->
+  <g>
+    <circle cx="256" cy="110" r="22" fill="#0f172a" stroke="#38bdf8" stroke-width="4" />
+    <circle cx="256" cy="110" r="14" fill="url(#nodeBlue)" />
+  </g>
+
+  <!-- 左上节点 (类/模块) -->
+  <g>
+    <circle cx="140" cy="200" r="20" fill="#0f172a" stroke="#818cf8" stroke-width="3.5" />
+    <circle cx="140" cy="200" r="12" fill="url(#nodePurple)" />
+  </g>
+
+  <!-- 右上节点 (服务/管道) -->
+  <g>
+    <circle cx="372" cy="200" r="20" fill="#0f172a" stroke="#60a5fa" stroke-width="3.5" />
+    <circle cx="372" cy="200" r="12" fill="url(#nodeBlue)" />
+  </g>
+
+  <!-- 左下节点 (数据依赖/实体) -->
+  <g>
+    <circle cx="160" cy="350" r="18" fill="#0f172a" stroke="#34d399" stroke-width="3.5" />
+    <circle cx="160" cy="350" r="11" fill="url(#nodeEmerald)" />
+  </g>
+
+  <!-- 右下节点 (计算/叶子函数) -->
+  <g>
+    <circle cx="352" cy="350" r="18" fill="#0f172a" stroke="#c084fc" stroke-width="3.5" />
+    <circle cx="352" cy="350" r="11" fill="url(#nodePurple)" />
+  </g>
+
+  <!-- 底部导出节点 -->
+  <g>
+    <circle cx="256" cy="400" r="16" fill="#0f172a" stroke="#38bdf8" stroke-width="3" />
+    <circle cx="256" cy="400" r="9" fill="url(#nodeAmber)" />
+  </g>
+
+  <!-- 6. 中心核心聚焦节点 (Symbol Contract Core / Ego Center) -->
+  <g filter="url(#glow)">
+    <!-- 脉冲外圈 -->
+    <circle cx="256" cy="256" r="44" fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-dasharray="6 4" opacity="0.8" />
+    
+    <!-- 主核心圆 -->
+    <circle cx="256" cy="256" r="34" fill="url(#centerNodeGrad)" stroke="#ffffff" stroke-width="3" />
+
+    <!-- 核心代码契约标识：经典优雅的架构菱形/代码括号 </> -->
+    <g fill="none" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+      <!-- 左括号 < -->
+      <path d="M 242 247 L 235 256 L 242 265" />
+      <!-- 右括号 > -->
+      <path d="M 270 247 L 277 256 L 270 265" />
+      <!-- 斜杠 / -->
+      <line x1="260" y1="244" x2="252" y2="268" />
+    </g>
+  </g>
+</svg>
