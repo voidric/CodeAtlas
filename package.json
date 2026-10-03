@@ -1,0 +1,159 @@
+{
+  "name": "codeatlas",
+  "displayName": "CodeAtlas",
+  "description": "多语言代码架构资产全景认知中心 (Python / TypeScript / JS)，提供四层架构透镜、全景报告、拓扑流转与代码罗盘",
+  "version": "0.1.0",
+  "publisher": "codeatlas-team",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/voidric/CodeAtlas.git"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Visualization",
+    "Other"
+  ],
+  "main": "./out/extension.js",
+  "activationEvents": [
+    "onView:codeatlas.mainView",
+    "onCommand:codeatlas.refresh",
+    "onCommand:codeatlas.showInGraph",
+    "onCommand:codeatlas.openWebviewPanel",
+    "onStartupFinished",
+    "onLanguage:python",
+    "onLanguage:typescript",
+    "onLanguage:javascript",
+    "onLanguage:typescriptreact",
+    "onLanguage:javascriptreact"
+  ],
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "codeatlas-container",
+          "title": "CodeAtlas",
+          "icon": "$(type-hierarchy)"
+        }
+      ]
+    },
+    "views": {
+      "codeatlas-container": [
+        {
+          "type": "webview",
+          "id": "codeatlas.mainView",
+          "name": "架构资产中心"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "codeatlas.refresh",
+        "title": "重新扫描工作区",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "codeatlas.showInGraph",
+        "title": "在图谱中聚焦当前实体",
+        "icon": "$(symbol-class)"
+      },
+      {
+        "command": "codeatlas.openWebviewPanel",
+        "title": "在独立标签页打开全景面板",
+        "icon": "$(split-horizontal)"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "codeatlas.showInGraph",
+          "when": "editorLangId == python || editorLangId == typescript || editorLangId == javascript || editorLangId == typescriptreact || editorLangId == javascriptreact",
+          "group": "navigation"
+        }
+      ],
+      "view/title": [
+        {
+          "command": "codeatlas.refresh",
+          "when": "view == codeatlas.mainView",
+          "group": "navigation@1"
+        },
+        {
+          "command": "codeatlas.openWebviewPanel",
+          "when": "view == codeatlas.mainView",
+          "group": "navigation@2"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "CodeAtlas",
+      "properties": {
+        "codeatlas.scanOnStartup": {
+          "type": "boolean",
+          "default": true,
+          "description": "工作区打开时是否自动扫描代码构建图谱"
+        },
+        "codeatlas.cursorDebounceMs": {
+          "type": "number",
+          "default": 250,
+          "description": "编辑器光标移动与图谱联动的防抖延迟（毫秒）"
+        },
+        "codeatlas.ignoreDirs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            ".venv",
+            "venv",
+            "__pycache__",
+            ".git",
+            "site-packages",
+            "node_modules",
+            "dist",
+            "out",
+            "build"
+          ],
+          "description": "扫描时忽略的目录模式"
+        },
+        "codeatlas.llmEndpoint": {
+          "type": "string",
+          "default": "http://127.0.0.1:11434/v1",
+          "description": "通用大模型 API 接口地址 Base URL (兼容 OpenAI 规范与本地服务，默认 http://127.0.0.1:11434/v1)"
+        },
+        "codeatlas.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "API 密钥 (OpenAI 规范 Bearer Token，本地无鉴权服务可留空)"
+        },
+        "codeatlas.selectedModel": {
+          "type": "string",
+          "default": "qwen2.5-coder:7b",
+          "description": "指定分析使用的大模型名称 (如 qwen2.5-coder:7b, deepseek-chat, gpt-4o)"
+        },
+        "codeatlas.enableIncrementalCache": {
+          "type": "boolean",
+          "default": true,
+          "description": "是否启用基于文件内容哈希 (MD5) 的增量分析缓存（未修改文件瞬间跳过）"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "test": "node out/test/testV035.js",
+    "package": "npx @vscode/vsce package"
+  },
+  "dependencies": {
+    "graphology": "^0.25.4",
+    "graphology-shortest-path": "^2.1.0",
+    "typescript": "^5.3.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/vscode": "^1.85.0"
+  }
+}

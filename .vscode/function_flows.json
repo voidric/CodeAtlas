@@ -1,0 +1,19 @@
+{
+  "version": "1.0",
+  "flows": [
+    {
+      "id": "flow-order-checkout",
+      "name": "Order Checkout Pipeline (电商结算流)",
+      "description": "完整下单结算链路：应用启动 -> 订单结算 -> 支付扣款 -> 税率计算",
+      "entrySymbolId": "sample_project/main.py#start_application",
+      "nodes": [
+        "sample_project/main.py#start_application",
+        "sample_project/services/order_service.py#checkout_order",
+        "sample_project/services/payment_service.py#process_checkout_payment",
+        "sample_project/services/payment_service.py#PaymentProcessor.execute_payment",
+        "sample_project/utils/calculator.py#calculate_tax"
+      ],
+      "updatedAt": "2026-10-02T18:00:00.000Z"
+    }
+  ]
+}

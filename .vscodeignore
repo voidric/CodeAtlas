@@ -1,0 +1,16 @@
+.vscode/**
+.vscode-test/**
+src/**
+sample_project/**
+out/test/**
+out/**/*.map
+*.ts
+*.log
+.gitignore
+tsconfig.json
+PROJECT_ARCHITECTURE_REPORT.md
+REQUIREMENTS.md
+ARCHITECTURE.md
+AGENTS.md
+MVP_RELEASE_NOTES.md
+*.vsix

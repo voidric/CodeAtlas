@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+
+# Compilation outputs
+out/
+dist/
+
+# VSIX extension packages
+*.vsix
+
+# Testing & Logs
+.vscode-test/
+*.log
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# Cache & Local State
+.vscode/*cache*.json
+.vscode/.*_cache.json
+
+# Internal specifications & design documents
+REQUIREMENTS.md
+ARCHITECTURE.md
+MVP_RELEASE_NOTES.md
+PROJECT_ARCHITECTURE_REPORT.md
+AGENTS.md
+
+
