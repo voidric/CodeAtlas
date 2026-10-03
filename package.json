@@ -1,6 +1,6 @@
 {
   "name": "codeatlas-architecture",
-  "displayName": "CodeAtlas Architecture",
+  "displayName": "CodeAtlas Architecture: Code Graph & Lens",
   "description": "多语言代码调用图谱与依赖分析扩展 (Python / TypeScript / JS)，支持静态链路追踪、未引用代码排查与本地 MCP 服务",
   "version": "0.1.1",
   "publisher": "voidric",
