@@ -57,12 +57,12 @@
 插件发布至 Visual Studio Marketplace 后，可在 VS Code 扩展商店搜索 `CodeAtlas` 或通过命令行直接安装：
 
 ```bash
-code --install-extension voidric.codeatlas-arch
+code --install-extension voidric.codeatlas-architecture
 ```
 
 ### 方式二：从 VSIX 离线包安装
 
-1. 获取编译生成的 `codeatlas-arch-0.1.0.vsix` 文件。
+1. 获取编译生成的 `codeatlas-architecture-0.1.0.vsix` 文件。
 2. 打开 VS Code / Cursor，按 `Ctrl+Shift+P` (macOS: `Cmd+Shift+P`) 打开命令面板。
 3. 输入并选择 `Extensions: Install from VSIX...`。
 4. 选择对应的 `.vsix` 文件完成安装。
