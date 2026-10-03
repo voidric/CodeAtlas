@@ -1,7 +1,7 @@
 {
   "name": "codeatlas-architecture",
   "displayName": "CodeAtlas Architecture: Code Graph & Lens",
-  "description": "多语言代码架构资产全景认知中心 (Python / TypeScript / JS)，提供四层架构透镜、全景报告、拓扑流转与代码罗盘",
+  "description": "多语言代码调用图谱与依赖分析扩展 (Python / TypeScript / JS)，支持静态链路追踪、未引用代码排查与本地 MCP 服务",
   "version": "0.1.0",
   "publisher": "voidric",
   "repository": {
@@ -44,7 +44,7 @@
         {
           "type": "webview",
           "id": "codeatlas.mainView",
-          "name": "架构资产中心"
+          "name": "架构图谱大纲"
         }
       ]
     },
@@ -61,7 +61,7 @@
       },
       {
         "command": "codeatlas.openWebviewPanel",
-        "title": "在独立标签页打开全景面板",
+        "title": "在独立标签页打开架构图谱",
         "icon": "$(split-horizontal)"
       }
     ],
@@ -145,7 +145,7 @@
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
     "test": "node out/test/testV035.js",
-    "package": "npx @vscode/vsce package"
+    "package": "npx @vscode/vsce package --readme-path docs/MARKETPLACE_README.md"
   },
   "dependencies": {
     "graphology": "^0.25.4",
