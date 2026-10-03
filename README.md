@@ -57,7 +57,7 @@
 插件发布至 Visual Studio Marketplace 后，可在 VS Code 扩展商店搜索 `CodeAtlas` 或通过命令行直接安装：
 
 ```bash
-code --install-extension voidric.codeatlas
+code --install-extension voidric.codeatlas-arch
 ```
 
 ### 方式二：从 VSIX 离线包安装
