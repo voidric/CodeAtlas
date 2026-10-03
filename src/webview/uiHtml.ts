@@ -74,11 +74,17 @@ export function getWebviewContent(nonce: string): string {
       width: 100%;
       gap: 6px;
     }
+    .search-row {
+      position: relative;
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
     .search-input {
       flex: 1;
       width: 100%;
       min-width: 0;
-      padding: 5px 9px;
+      padding: 5px 24px 5px 9px;
       background: var(--vscode-input-background, #3c3c3c);
       color: var(--fg);
       border: 1px solid var(--vscode-input-border, #555);
@@ -88,6 +94,156 @@ export function getWebviewContent(nonce: string): string {
       outline: none;
     }
     .search-input:focus { border-color: var(--accent); }
+    .search-clear-btn {
+      position: absolute;
+      right: 6px;
+      background: transparent;
+      border: none;
+      color: var(--fg-sub);
+      font-size: 11px;
+      cursor: pointer;
+      padding: 2px 4px;
+      border-radius: 2px;
+      transition: color 0.15s, background 0.15s;
+    }
+    .search-clear-btn:hover {
+      color: var(--fg);
+      background: var(--hover-bg);
+    }
+    .search-results-dropdown {
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0;
+      right: 0;
+      max-height: 420px;
+      overflow-y: auto;
+      background: var(--card-bg);
+      border: 1px solid var(--accent);
+      border-radius: 6px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+    }
+    .search-results-header {
+      padding: 6px 10px;
+      background: rgba(0, 122, 204, 0.15);
+      border-bottom: 1px solid var(--card-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--fg);
+    }
+    .search-results-close {
+      cursor: pointer;
+      color: var(--fg-sub);
+      font-size: 12px;
+      padding: 0 4px;
+      border-radius: 2px;
+    }
+    .search-results-close:hover {
+      color: var(--fg);
+      background: var(--hover-bg);
+    }
+    .search-results-list {
+      display: flex;
+      flex-direction: column;
+      padding: 4px;
+      gap: 3px;
+      overflow-y: auto;
+    }
+    .search-result-item {
+      padding: 6px 8px;
+      border-radius: 4px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      transition: background 0.12s, border-color 0.12s;
+    }
+    .search-result-item:hover {
+      background: var(--hover-bg);
+      border-color: var(--accent);
+    }
+    .search-result-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+    }
+    .search-result-name-group {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      min-width: 0;
+    }
+    .search-result-name {
+      font-family: var(--code-font);
+      font-weight: 700;
+      font-size: 11px;
+      color: var(--fg);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .search-result-score {
+      font-size: 9px;
+      color: var(--accent);
+      background: rgba(0, 122, 204, 0.1);
+      border: 1px solid rgba(0, 122, 204, 0.25);
+      border-radius: 2px;
+      padding: 1px 4px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .search-result-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      font-size: 10px;
+    }
+    .search-result-path {
+      color: var(--fg-sub);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-family: var(--code-font);
+      font-size: 9.5px;
+    }
+    .search-result-reason {
+      font-size: 9.5px;
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      border-radius: 2px;
+      padding: 1px 4px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .search-result-sig {
+      font-size: 9.5px;
+      color: var(--fg-sub);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-family: var(--code-font);
+    }
+    .search-result-summary {
+      font-size: 10px;
+      color: var(--fg-sub);
+      line-height: 1.3;
+      padding: 3px 6px;
+      background: rgba(0, 0, 0, 0.15);
+      border-radius: 2px;
+      border-left: 2px solid var(--accent);
+    }
 
     /* 双态主导航 Tab */
     .tab-bar {
@@ -936,7 +1092,9 @@ export function getWebviewContent(nonce: string): string {
   <!-- 顶部主工具栏 -->
   <div class="toolbar">
     <div class="search-row">
-      <input type="text" id="search-input" class="search-input" placeholder="搜索架构树/文件/类/函数..." />
+      <input type="text" id="search-input" class="search-input" placeholder="搜索架构树/类/函数 (支持自然语言业务词)..." />
+      <button class="search-clear-btn" id="btn-clear-search" style="display: none;" title="清空搜索">✕</button>
+      <div class="search-results-dropdown" id="search-results-dropdown" style="display: none;"></div>
     </div>
     <div class="tab-bar">
       <div class="tab-group-left">
@@ -1116,6 +1274,10 @@ export function getWebviewContent(nonce: string): string {
     const panelCard = document.getElementById('panel-card');
 
     const searchInput = document.getElementById('search-input');
+    const searchDropdown = document.getElementById('search-results-dropdown');
+    const btnClearSearch = document.getElementById('btn-clear-search');
+    let searchDebounceTimer = null;
+    let latestSearchResults = [];
     const btnRefresh = document.getElementById('btn-refresh');
     const btnBatchAi = document.getElementById('btn-batch-ai');
     const btnExportMd = document.getElementById('btn-export-md');
@@ -2552,14 +2714,149 @@ export function getWebviewContent(nonce: string): string {
       });
     }
 
-    // 搜索输入过滤
+    // ========================================================
+    // 智能搜索候选浮层控制与交互 (Top N Candidates)
+    // ========================================================
+    function hideSearchResults() {
+      if (searchDropdown) {
+        searchDropdown.style.display = 'none';
+        searchDropdown.innerHTML = '';
+      }
+    }
+
+    function selectSearchResult(item) {
+      if (!item) return;
+      vscode.postMessage({ type: 'FOCUS_NODE', symbolId: item.id });
+      switchTab('card');
+      hideSearchResults();
+    }
+
+    function renderSearchResults(query, results) {
+      if (!searchDropdown) return;
+      latestSearchResults = results || [];
+
+      if (!query || !query.trim()) {
+        hideSearchResults();
+        return;
+      }
+
+      searchDropdown.innerHTML = '';
+      searchDropdown.style.display = 'flex';
+
+      const header = document.createElement('div');
+      header.className = 'search-results-header';
+      header.innerHTML = [
+        '<span>🎯 搜索候选 (共 ', results.length, ' 个相关符号)</span>',
+        '<span class="search-results-close" title="关闭 (Esc)">✕</span>'
+      ].join('');
+      const closeBtn = header.querySelector('.search-results-close');
+      if (closeBtn) closeBtn.onclick = hideSearchResults;
+      searchDropdown.appendChild(header);
+
+      if (results.length === 0) {
+        const empty = document.createElement('div');
+        empty.style.padding = '14px 10px';
+        empty.style.textAlign = 'center';
+        empty.style.color = 'var(--fg-sub)';
+        empty.style.fontSize = '11px';
+        empty.innerHTML = '未找到与 "<b>' + escapeHtml(query) + '</b>" 相关的符号<br><span style="font-size:10px; color:var(--fg-sub); margin-top:4px; display:inline-block;">支持自然语言业务词（如“用户验证”）、类型特征（如 in:User）或类名/函数名</span>';
+        searchDropdown.appendChild(empty);
+        return;
+      }
+
+      const list = document.createElement('div');
+      list.className = 'search-results-list';
+
+      results.forEach((item, idx) => {
+        const row = document.createElement('div');
+        row.className = 'search-result-item';
+
+        const kindClass = item.kind === 'class' ? 'tree-tag-class' : (item.kind === 'method' ? 'tree-tag-method' : 'tree-tag-func');
+        const kindLabel = item.kind === 'class' ? '类' : (item.kind === 'method' ? '方法' : '函数');
+
+        const shortFile = (item.filePath || '').split('/').pop() || item.filePath;
+        const deadBadge = item.isDeadCodeCandidate ? '<span class="tree-dead-tag">未引用</span>' : '';
+        const sigHtml = item.signature ? '<div class="search-result-sig"><code>' + escapeHtml(item.signature) + '</code></div>' : '';
+        const summaryHtml = item.summary ? '<div class="search-result-summary">' + escapeHtml(item.summary) + '</div>' : '';
+
+        row.innerHTML = [
+          '<div class="search-result-top">',
+            '<div class="search-result-name-group">',
+              '<span class="tree-tag ', kindClass, '">', kindLabel, '</span>',
+              '<span class="search-result-name" title="', escapeHtml(item.id), '">', escapeHtml(item.name), '</span>',
+              deadBadge,
+            '</div>',
+            '<span class="search-result-score">相关度 ', Math.min(100, Math.round(item.score)), '</span>',
+          '</div>',
+          '<div class="search-result-meta">',
+            '<span class="search-result-path" title="', escapeHtml(item.filePath), ':', item.line, '">', escapeHtml(shortFile), ':', item.line, '</span>',
+            '<span class="search-result-reason" title="', escapeHtml(item.matchedReason), '">', escapeHtml(item.matchedReason), '</span>',
+          '</div>',
+          sigHtml,
+          summaryHtml
+        ].join('');
+
+        row.onclick = () => {
+          selectSearchResult(item);
+        };
+
+        row.ondblclick = (e) => {
+          e.stopPropagation();
+          vscode.postMessage({ type: 'JUMP_TO_LOCATION', filePath: item.filePath, line: item.line, column: 1 });
+          hideSearchResults();
+        };
+
+        list.appendChild(row);
+      });
+
+      searchDropdown.appendChild(list);
+    }
+
+    // 搜索输入过滤与防抖触发
     searchInput.oninput = (e) => {
       const q = e.target.value.trim();
+      if (btnClearSearch) {
+        btnClearSearch.style.display = q ? 'block' : 'none';
+      }
       renderHierarchyTree(currentTreeData);
+
+      if (searchDebounceTimer) clearTimeout(searchDebounceTimer);
       if (q) {
-        vscode.postMessage({ type: 'SEARCH', query: q });
+        searchDebounceTimer = setTimeout(() => {
+          vscode.postMessage({ type: 'SEARCH', query: q });
+        }, 120);
+      } else {
+        hideSearchResults();
       }
     };
+
+    if (btnClearSearch) {
+      btnClearSearch.onclick = () => {
+        searchInput.value = '';
+        btnClearSearch.style.display = 'none';
+        hideSearchResults();
+        renderHierarchyTree(currentTreeData);
+        searchInput.focus();
+      };
+    }
+
+    searchInput.onkeydown = (e) => {
+      if (e.key === 'Escape') {
+        hideSearchResults();
+      } else if (e.key === 'Enter') {
+        if (latestSearchResults && latestSearchResults.length > 0) {
+          selectSearchResult(latestSearchResults[0]);
+        }
+      }
+    };
+
+    document.addEventListener('click', (e) => {
+      if (searchDropdown && searchDropdown.style.display !== 'none') {
+        if (!searchDropdown.contains(e.target) && e.target !== searchInput && e.target !== btnClearSearch) {
+          hideSearchResults();
+        }
+      }
+    });
 
     if (btnRefresh) {
       btnRefresh.onclick = () => {
@@ -2571,6 +2868,9 @@ export function getWebviewContent(nonce: string): string {
     window.addEventListener('message', (event) => {
       const msg = event.data;
       switch (msg.type) {
+        case 'SET_SEARCH_RESULTS':
+          renderSearchResults(msg.query, msg.results);
+          break;
         case 'SET_HIERARCHY_TREE':
           renderHierarchyTree(msg.tree);
           break;

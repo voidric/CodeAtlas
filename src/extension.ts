@@ -21,7 +21,8 @@ import {
   FunctionNode,
   ArchitectureTreeNode,
   MacroGraphData,
-  RelationEdge
+  RelationEdge,
+  SearchCandidateItem
 } from './types';
 
 export function activate(context: vscode.ExtensionContext) {
@@ -978,13 +979,48 @@ export function activate(context: vscode.ExtensionContext) {
     }
   }
 
-  // 搜索处理 (支持自然语言语义检索与复合过滤)
+  // 搜索处理 (支持自然语言语义检索与复合过滤，返回 Top N 相关候选)
   async function handleSearch(query: string) {
-    if (!query) return;
+    const trimmed = (query || '').trim();
+    if (!trimmed) {
+      const emptyMsg = {
+        type: 'SET_SEARCH_RESULTS' as const,
+        query: '',
+        results: [] as SearchCandidateItem[],
+      };
+      webviewProvider.postMessage(emptyMsg);
+      for (const p of activePanels) {
+        p.webview.postMessage(emptyMsg);
+      }
+      return;
+    }
+
     const allNodes = graphManager.getAllNodes();
-    const results = await searchEngine.search(allNodes, query, 5);
-    if (results.length > 0) {
-      focusSymbolInGraph(results[0].node.id);
+    const results = await searchEngine.search(allNodes, trimmed, 10);
+    const mapped: SearchCandidateItem[] = results.map(r => {
+      const fn = r.node.kind !== 'class' ? (r.node as FunctionNode) : null;
+      return {
+        id: r.node.id,
+        name: r.node.name,
+        kind: r.node.kind,
+        filePath: r.node.filePath,
+        line: r.node.range.startLine,
+        score: r.score,
+        matchedReason: r.matchedReason,
+        summary: r.node.docstring?.summary || '',
+        isDeadCodeCandidate: Boolean(r.node.isDeadCodeCandidate),
+        signature: fn ? `(${fn.parameters.map(p => `${p.name}: ${p.typeHint || 'Any'}`).join(', ')}) -> ${fn.returnType || 'Any'}` : '',
+      };
+    });
+
+    const msg = {
+      type: 'SET_SEARCH_RESULTS' as const,
+      query: trimmed,
+      results: mapped,
+    };
+    webviewProvider.postMessage(msg);
+    for (const p of activePanels) {
+      p.webview.postMessage(msg);
     }
   }
 

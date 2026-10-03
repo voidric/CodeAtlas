@@ -32,9 +32,12 @@
 
 ![Unused Code Detection](https://raw.githubusercontent.com/voidric/CodeAtlas-Architecture/main/media/dead_code_view.png)
 
-### 4. 复合语法特征检索
-* 支持通过函数参数类型与返回值类型进行精准语法过滤，如 `in:float out:dict`、`kind:class`。
-* 结合本地拼音前缀索引与词法匹配，实现毫秒级符号定位。
+### 4. 自然语言意图与排序候选检索 (Top-N Candidates)
+* **自然语言意图检索**：支持输入口语化业务描述（如“结算 订单”、“用户验证”、“计算税费”），结合 Docstring 契约与本地语义模型匹配核心函数与类。
+* **Top-N 相关度排序候选列表**：提供候选浮层，清晰展示匹配度评分、命中理由（名称包含、文档摘要命中、契约类型规则）、函数签名与路径。单击直达实体流转详情，双击跳转源码定义。
+* **复合特征语法过滤**：支持通过参数与返回值类型精准过滤，如 `in:float out:dict`、`kind:class`。
+
+![Natural Language & Semantic Search Candidates](https://raw.githubusercontent.com/voidric/CodeAtlas-Architecture/main/media/search_candidates.png)
 
 ### 5. 本地轻量模型辅助 (可选)
 * 兼容本地 Ollama 与标准 OpenAI 规范接口（如 `qwen2.5-coder:7b`）。

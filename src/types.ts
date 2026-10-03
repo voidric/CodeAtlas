@@ -215,12 +215,25 @@ export type WebviewToHostMessage =
   | { type: 'CLEAR_CACHE' }
   | { type: 'EXPORT_MARKDOWN_DOC' };
 
+export interface SearchCandidateItem {
+  id: string;
+  name: string;
+  kind: string;
+  filePath: string;
+  line: number;
+  score: number;
+  matchedReason: string;
+  summary: string;
+  isDeadCodeCandidate: boolean;
+  signature?: string;
+}
+
 export type HostToWebviewMessage =
   | { type: 'SET_EGO_GRAPH'; data: EgoGraphData }
   | { type: 'SET_HIERARCHY_TREE'; tree: ArchitectureTreeNode[] }
   | { type: 'SET_MACRO_GRAPH'; data: MacroGraphData }
   | { type: 'SET_STATUS'; status: string; totalSymbols: number; totalEdges: number }
-  | { type: 'SET_SEARCH_RESULTS'; results: SymbolNode[] }
+  | { type: 'SET_SEARCH_RESULTS'; query: string; results: SearchCandidateItem[] }
   | { type: 'HIGHLIGHT_PATH'; pathNodes: string[]; pathEdges: string[] }
   | { type: 'UPDATE_AI_DOC'; symbolId: string; summary: string }
   | { type: 'UPDATE_FILE_AI_DOC'; filePath: string; summary: string }
