@@ -9,6 +9,8 @@
 
 通过抽象语法树 (AST) 与有向拓扑图算法，在大型复杂代码库中提供多层级依赖大纲、静态调用链寻路、未引用死代码检测及编辑器双向光标跳转，并可作为 AI Coding Agent（如 Cursor、Antigravity、Claude Desktop）的结构化上下文基础设施。
 
+![CodeAtlas Architecture Overview](https://raw.githubusercontent.com/voidric/CodeAtlas-Architecture/main/media/architecture_tree.png)
+
 ---
 
 ## 核心功能
@@ -18,13 +20,17 @@
 * **局部辐射拓扑 (Ego Graph)**：以任意指定函数或类为核心，动态展开其直接调用者（Callers）与被依赖项（Callees），支持自定义调用深度。
 * **光标双向联动**：在编辑器中移动光标时，视图在 250ms 内自动聚焦至当前代码实体；点击图谱节点即刻跳转至对应源文件与代码行。
 
-### 2. 静态调用链路径追踪 (BFS Path Finding)
-* 基于广度优先搜索 (BFS) 遍历跨文件静态调用关系。
-* 输入起点与终点符号，计算最短调用路径与跳数（Hops），并在图谱中按序高亮显示调用流向。
+### 2. 符号契约与调用流转详情
+* **调用流与依赖追踪**：选定任意函数或类，清晰列出其上游调用者（Callers）与下游依赖项（Callees）、所属类及实例化点。
+* **形参契约与文档摘要**：展示参数列表、类型标注、返回值契约与业务摘要，提供调用点跳转链接。
+
+![Symbol Contract and Call Flow](https://raw.githubusercontent.com/voidric/CodeAtlas-Architecture/main/media/symbol_contract.png)
 
 ### 3. 未引用符号检测 (Dead Code Detection)
 * 扫描工作区顶层函数与类，识别零外部引用、零调用者的潜在冗余代码候选。
 * 辅助代码重构与技术债务排查。
+
+![Unused Code Detection](https://raw.githubusercontent.com/voidric/CodeAtlas-Architecture/main/media/dead_code_view.png)
 
 ### 4. 复合语法特征检索
 * 支持通过函数参数类型与返回值类型进行精准语法过滤，如 `in:float out:dict`、`kind:class`。
