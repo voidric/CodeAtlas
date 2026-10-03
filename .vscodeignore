@@ -16,3 +16,4 @@ MVP_RELEASE_NOTES.md
 *.vsix
 README.md
 docs/**
+releases/**

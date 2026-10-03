@@ -145,7 +145,7 @@
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
     "test": "node out/test/testV035.js",
-    "package": "npx @vscode/vsce package --readme-path docs/MARKETPLACE_README.md"
+    "package": "npx @vscode/vsce package --readme-path docs/MARKETPLACE_README.md --out releases/"
   },
   "dependencies": {
     "graphology": "^0.25.4",
