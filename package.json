@@ -3,7 +3,7 @@
   "displayName": "CodeAtlas",
   "description": "多语言代码架构资产全景认知中心 (Python / TypeScript / JS)，提供四层架构透镜、全景报告、拓扑流转与代码罗盘",
   "version": "0.1.0",
-  "publisher": "codeatlas-team",
+  "publisher": "voidric",
   "repository": {
     "type": "git",
     "url": "https://github.com/voidric/CodeAtlas.git"
